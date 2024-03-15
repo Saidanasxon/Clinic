@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <!-- Breadcrumb Section Start -->
+    <div class="section">
+
+        <!-- Breadcrumb Area Start -->
+        <div class="breadcrumb-area bg-light">
+            <div class="container-fluid">
+                <div class="breadcrumb-content text-center">
+                    <h1 class="title">Band qilingan vaqtlar  </h1>
+
+                </div>
+            </div>
+        </div>
+        <!-- Breadcrumb Area End -->
+
+    </div>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Wishlist Section Start -->
+    <div class="section section-margin">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="wishlist-table table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                  
+                                    
+                                    <th class="pro-thumbnail">Bemor</th>
+                                    
+                                    <th class="pro-thumbnail">Doktor</th>
+                                    <th class="pro-title">Vaqt</th>
+                                
+
+                                    {% comment %} <th class="pro-remove">To'lov  </th> {% endcomment %}
+
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                             
+                                {% for order in davolash %}
+                               
+                                <tr>
+                                    
+                                  
+                                    
+                               
+
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                    
+                                                    <li>{{order.foydalanuvchi }}</li>
+                                               
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                
+                                                    <li>{{order.qabul_vaqt.doktor }} </li>
+                                               
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    <td class="pro-title">
+                                        <a href="#">
+                                            <ul>
+                                                
+                                                    <li>{{order.qabul_vaqt.vaqt }} </li>
+                                               
+                                            </ul>    
+                                        </a>
+                                    </td>
+                                    
+                                    
+                                    
+                                   
+                                    
+                                    {% comment %} <td class="pro-cart"><a href="cart.html" class="btn btn-dark btn-hover-primary rounded-0">To'lov</a></td> {% endcomment %}
+                                    {% comment %} <td class="pro-remove"><a href="#"><i class="pe-7s-trash"></i></a></td> {% endcomment %}
+                                    {% endfor %}
+                       
+                                </tr>
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Wishlist Section End -->
+
+    {% endblock content %}

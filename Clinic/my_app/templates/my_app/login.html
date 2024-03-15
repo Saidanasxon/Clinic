@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <!-- login section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container ">
+      <div class="heading_container">
+        <h2 class="">
+          Log in
+        </h2>
+      </div>
+
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <div class="d-flex ">
+              <button class="btn btn-primary" type="submit">
+                LOG IN
+              </button>
+            </div>
+          </form>
+          <br>
+          <p>
+            Sizda hali shaxsiy hisob yo'qmi?
+            <a href="{% url 'user:register' %}">Ro'yxatdan o'tish</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

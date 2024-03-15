@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+  <!-- register section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container ">
+      <div class="heading_container">
+        <h2 class="">
+          Sign Up
+        </h2>
+      </div>
+
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        
+            <div class="d-flex ">
+              <button class="btn btn-primary" type="submit">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock content %}

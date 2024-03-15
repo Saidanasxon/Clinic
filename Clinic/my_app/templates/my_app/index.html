@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+
+    
+
+
+    
+
+
+    <!-- Team Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="row">
+                {% for doktor, qabul_time in doctor_time.items %}
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="team-item position-relative rounded overflow-hidden wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="overflow-hidden">
+                            <img class="img-fluid" src="{{ doktor.rasmi.url }}" alt="">
+                        </div>
+                        <div class="team-text bg-light text-center p-4">
+                            <h5>{{ doktor.ism }}</h5>
+                            <p class="text-primary">{{ doktor.soha }}</p>
+                           
+                            <div class="team-social text-center">
+                                {% if user.is_authenticated%}
+                                
+                                {% for time in qabul_time %}
+                                    
+                                    <a class="btn btn-square vaqt-btn" id="vaqt{{ time.id }}" href="#" data-vaqtid="{{ time.id }}">{{ time.vaqt }} </a>
+                                    {% endfor %}   
+                                    {% else %}
+                                    <p>Qabulga yozilish uchun login qiling </p>
+                                    {% endif %}
+                                    
+                            
+                                    
+                            
+                            </div>
+                      
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="mavjud" tabindex="-1" aria-labelledby="mavjud" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mavjud">Xabar! &#128400;</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script>
+    $(document).ready(function(){
+        $('.vaqt-btn').click(function(e){
+            e.preventDefault();
+            var vaqt_id = $(this).data("vaqtid");
+            console.log(vaqt_id);
+            
+            $.ajax({
+                type: 'POST',
+                url: "{% url 'vaqt_add' %}",
+                data: {
+                    'vaqt_id': vaqt_id,
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'action': 'post'
+                },
+                success: function(json){
+                    if (JSON.status === 'succes') {
+                        $('#mavjud .modal-body').html("Qabul ro'hatga olindi" );
+                    } else {
+                        $('#mavjud .modal-body').html("Qabul ro'hatga olinmadi");
+                    }
+                    $('#mavjud').modal('show');
+                    setTimeout(function() {
+                        $('#mavjud').modal('hide');
+                        location.reload();
+                    }, 2000);
+                    // Muvaffaqiyatli javob
+                },
+                error: function(json){
+                   
+                }
+            
+            });
+        });
+    });
+    </script>
+    <!-- Team End -->
+
+
+    
+    
+
+{% endblock content %}
+
+
+
+
+
+
+   
